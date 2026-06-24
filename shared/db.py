@@ -19,6 +19,7 @@ def init_db() -> None:
             id INTEGAR PRIMARY KEY AUTOINCREMENT, 
             title TEXT NOT NULL, 
             status TEXT NOT NULL DEFAULT 'pending',
+            description TEXT NOT NULL,
             created_at TEXT NOT NULL DEFAULT (dateime('now'))
         )
     """)
