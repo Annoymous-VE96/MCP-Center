@@ -1,7 +1,6 @@
-from domains.discord.client import send_notification
+from domains.discord.tools import send_discord_notification
+from domains.discord.schemas import DiscordInput
 
-message = input("Enter a Message: ")
+message = input('Enter a message : ')
 
-response = send_notification(message)
-
-print(response)
+print(send_discord_notification(DiscordInput(message=message)))

@@ -3,12 +3,14 @@ from domains.weather.client import (
     weather_code_to_text, degrees_to_compass, aqi_category,
 )
 from domains.weather.schemas import WeatherBriefInput, WeatherBriefOutput
-from mcp.server.fastmcp import FastMCP
 
-mcp = FastMCP('MCP_Center')
 
-@mcp.tool()
 def get_weather_tool(input: WeatherBriefInput) -> WeatherBriefOutput:
+    """
+    Gets the weather update for today
+    input: city name
+    output: humidity, temperature, real feel, wind speed and many more 
+    """
     loc = geocode_city(input.city)
     data = get_forecast(loc['lat'], loc['lon'])
     air = get_aqi(loc['lat'], loc['lon'])

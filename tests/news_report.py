@@ -1,5 +1,5 @@
-from domains.news.client import get_news_feed
-from domains.news.tools import url_shortner
+from domains.news.tools import get_news_feed
+from domains.news.client import url_shortner
 
 topic = input("Enter a Topic: ")
 
