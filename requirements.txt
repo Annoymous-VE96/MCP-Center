@@ -4,6 +4,7 @@ feedparser
 ics
 PyGithub
 httpx
+groq
 icalendar
 pydantic 
 python-dotenv
