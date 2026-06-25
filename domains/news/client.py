@@ -15,7 +15,18 @@ def find_news(query:str)->FeedParserDict:
     encoded_query = quote(query)
     rss_url = f"https://news.google.com/rss/search?q={encoded_query}"
     feed = feedparser.parse(rss_url)
-    return feed
+    news_feed ={}
+    index = 1
+    for article in feed.entries[:5]:
+        title = article.title
+        long_url = article.link
+        short_url = url_shortner(long_url,title)
+        news_feed[index] = {
+            'title':title,
+            'link':short_url
+        }
+        index+=1
+    return news_feed
 
 
 
