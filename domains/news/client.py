@@ -6,27 +6,40 @@ from dotenv import load_dotenv
 import requests
 import re
 import uuid
+from domains.news.schemas import NewsArticle,NewsFeed
+
 
 load_dotenv()
 
 URL_SHORTNER = os.getenv("URL_SHORTNER_API")
 
-def find_news(query:str)->FeedParserDict:
+def find_news(query:str)->NewsFeed:
     encoded_query = quote(query)
     rss_url = f"https://news.google.com/rss/search?q={encoded_query}"
     feed = feedparser.parse(rss_url)
-    news_feed ={}
-    index = 1
-    for article in feed.entries[:5]:
-        title = article.title
-        long_url = article.link
-        short_url = url_shortner(long_url,title)
-        news_feed[index] = {
-            'title':title,
-            'link':short_url
-        }
-        index+=1
-    return news_feed
+    # news_feed ={}
+    # index = 1
+    # for article in feed.entries[:5]:
+    #     title = article.title
+    #     long_url = article.link
+    #     short_url = url_shortner(long_url,title)
+    #     news_feed[index] = {
+    #         'title':title,
+    #         'link':short_url
+    #     }
+    #     index+=1
+    news_articles = []
+    for idx ,article in enumerate(feed.entries[:5], start=1):
+        news_articles.append(
+            NewsArticle(
+                index=idx,
+                title=article.title,
+                link = url_shortner(article.link,article.title)
+            )
+        )
+
+
+    return NewsFeed(topic=query,articles=news_articles)
 
 
 
