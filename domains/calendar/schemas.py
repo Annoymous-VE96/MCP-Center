@@ -27,6 +27,5 @@ class GetUpcomingEventsInput(BaseModel):
 class CalendarEventItem(BaseModel):
     event_id: str
     title: str
-    date: str
     start_time: str
     end_time: str
