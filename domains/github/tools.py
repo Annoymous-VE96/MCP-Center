@@ -3,6 +3,7 @@ from domains.github.schemas import (
     CreateIssueInput, CreateIssueOutput,
     RepoActivityInput, RepoActivityItem,
 )
+from shared.db import log_activity
 
 def create_github_issue_tool(input: CreateIssueInput) -> CreateIssueOutput:
     """
@@ -11,9 +12,11 @@ def create_github_issue_tool(input: CreateIssueInput) -> CreateIssueOutput:
     output: issue number, url of the created issue
     """
     data = create_issue(input.repo, input.title, input.body)
+    log_activity('github', 'created a issue')
     return CreateIssueOutput(
         issue_number=data["number"],
         url=data["html_url"]
+
     )
 
 def get_repo_activity_tool(input: RepoActivityInput) -> list[RepoActivityItem]:

@@ -4,6 +4,7 @@ from domains.discord.tools import send_discord_notification_tool
 from domains.calendar.tools import create_calendar_event_tool, get_upcoming_events_tool
 from domains.weather.tools import get_weather_tool
 from domains.news.tools import get_news_feed_tool
+from shared.db import init_db
 
 mcp = FastMCP("MCP_Center")
 
@@ -17,4 +18,5 @@ mcp.tool()(get_weather_tool)
 
 
 if __name__ == "__main__":
+    init_db()
     mcp.run(transport="stdio")

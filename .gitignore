@@ -17,3 +17,4 @@ main.py
 
 domains/calendar/credentials.json
 domains/calendar/token.json
+mcp_center.db
