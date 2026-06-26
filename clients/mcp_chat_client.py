@@ -26,8 +26,8 @@ import asyncio
 import json
 import os
 import pathlib
-
 from dotenv import load_dotenv
+
 load_dotenv()
 
 from groq import Groq
@@ -38,7 +38,7 @@ from mcp.client.stdio import stdio_client
 # ============================================================
 # CONFIG — the only section you'd ever need to touch
 # ============================================================
-GROQ_MODEL = "llama-3.3-70b-versatile"
+GROQ_MODEL = "openai/gpt-oss-20b"
 SERVER_SCRIPT = str(pathlib.Path(__file__).parent.parent / "server.py")
 SYSTEM_PROMPT = "You are a helpful ops assistant talk with the user. Use the available tools when needed."
 

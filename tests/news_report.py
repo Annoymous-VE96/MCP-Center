@@ -1,9 +1,9 @@
-from domains.news.tools import get_news_feed
+from domains.news.tools import get_news_feed_tool
 from domains.news.client import url_shortner
 
 topic = input("Enter a Topic: ")
 
-response = get_news_feed(topic)
+response = get_news_feed_tool(topic)
 
 # for article in response.entries[:5]:
 #     # for k,v in article.items():

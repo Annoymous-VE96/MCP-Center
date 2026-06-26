@@ -6,6 +6,7 @@ PyGithub
 httpx
 groq
 icalendar
+dotenv
 pydantic 
 python-dotenv
 pathlib

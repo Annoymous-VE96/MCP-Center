@@ -3,21 +3,26 @@ from pydantic import BaseModel, Field
 
 class CreateEventInput(BaseModel):
     title: str
-    date: str
-    start_time: str = Field(..., description="ISO 8601, e.g. 2026-06-25T10:00:00")
-    end_time: str = Field(..., description="ISO 8601, e.g. 2026-06-25T11:00:00")
+    start_time: str = Field(..., description="IST, e.g. 2026-06-27T10:00:00+05:30")
+    end_time: str = Field(..., description="IST, e.g. 2026-06-27T10:00:00+05:30")
     description: str = ""
-    timezone: str = "UTC"
-
+    timezone: str = "IST"
 
 class CreateEventOutput(BaseModel):
     event_id: str
     html_link: str
 
+class CheckAvailabilityInput(BaseModel):
+    start_time: str
+    end_time: str
+
+class CheckAvailabilityOutput(BaseModel):
+    available: bool
+    conflicting_events: list[dict]
 
 class GetUpcomingEventsInput(BaseModel):
-    max_results: int = 5
-
+    start_time: str
+    end_time: str
 
 class CalendarEventItem(BaseModel):
     event_id: str
