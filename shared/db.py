@@ -44,7 +44,7 @@ def log_activity(domain: str, action: str, summary: str = "") -> None:
     """Every domain's tools.py calls this after a successful real action."""
     conn = get_connection()
     conn.execute(
-        "INSERT INTO logs (domain, action, details) VALUES (?, ?, ?)",
+        "INSERT INTO logs (domain, action) VALUES (?, ?)",
         (domain, action),
     )
     conn.commit()

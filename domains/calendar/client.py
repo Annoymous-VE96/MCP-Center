@@ -1,6 +1,6 @@
 from googleapiclient.discovery import build
 from domains.calendar.auth import get_credentials
-import datetime
+from datetime import datetime
 
 CALENDAR_ID = "primary"
 

@@ -3,7 +3,7 @@ from domains.weather.client import (
     weather_code_to_text, degrees_to_compass, aqi_category,
 )
 from domains.weather.schemas import WeatherBriefInput, WeatherBriefOutput
-
+from shared.db import log_activity
 
 def get_weather_tool(input: WeatherBriefInput) -> WeatherBriefOutput:
     """
@@ -11,6 +11,7 @@ def get_weather_tool(input: WeatherBriefInput) -> WeatherBriefOutput:
     input: city name
     output: humidity, temperature, real feel, wind speed and many more 
     """
+    log_activity('weather', 'got the weather update')
     loc = geocode_city(input.city)
     data = get_forecast(loc['lat'], loc['lon'])
     air = get_aqi(loc['lat'], loc['lon'])

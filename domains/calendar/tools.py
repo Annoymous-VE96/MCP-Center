@@ -3,7 +3,7 @@ from domains.calendar.schemas import (
     CreateEventInput, CreateEventOutput, CheckAvailabilityInput,
     GetUpcomingEventsInput, CalendarEventItem, CheckAvailabilityOutput
 )
-
+from shared.db import log_activity
 
 def create_calendar_event_tool(input: CreateEventInput) -> CreateEventOutput:
     """
@@ -11,6 +11,7 @@ def create_calendar_event_tool(input: CreateEventInput) -> CreateEventOutput:
     input: title, start_time, end_time (ISO 8601 format "YYYY-MM-DDTHH:MM:SS", e.g. "2026-06-27T10:00:00"), description
     output: event id, link of the event on calendar
     """
+    log_activity('calendar', 'created a event to the calendar')
     event = create_event(
         input.title, input.start_time, 
         input.end_time, input.description
@@ -23,10 +24,11 @@ def create_calendar_event_tool(input: CreateEventInput) -> CreateEventOutput:
 
 def get_upcoming_events_tool(input: GetUpcomingEventsInput) -> list[CalendarEventItem]:
     """
-    Gets the list of event from the google calendar used to check availability
+    Gets the list of event from the google calendar.
     input: start time, end time (ISO 8601 format "YYYY-MM-DDTHH:MM:SS", e.g. "2026-06-27T10:00:00")
     output: list of event id, date, start and end time, title
     """
+    log_activity('calendar', 'provided the upcoming event list')
     events = get_events_in_range(input.start_time, input.end_time)
     return [
         CalendarEventItem(
@@ -44,6 +46,7 @@ def check_availability_tool(input: CheckAvailabilityInput) -> CheckAvailabilityO
     input: start time, end time (ISO 8601 format "YYYY-MM-DDTHH:MM:SS", e.g. "2026-06-27T10:00:00")
     output: available(boolean) true means available, conflicting_events a list if empty no event on that slot means free 
     """
+    log_activity('calendar', 'checked availablity')
     events = get_events_in_range(input.start_time, input.end_time)
     free = is_slot_free(input.start_time, input.end_time, events)
     return CheckAvailabilityOutput(

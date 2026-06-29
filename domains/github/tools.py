@@ -8,7 +8,7 @@ from shared.db import log_activity
 def create_github_issue_tool(input: CreateIssueInput) -> CreateIssueOutput:
     """
     Creates a github issue inside a designated repo
-    input: repo name, title, description
+    input: repo name, title, body
     output: issue number, url of the created issue
     """
     data = create_issue(input.repo, input.title, input.body)
